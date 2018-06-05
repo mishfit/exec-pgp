@@ -1,0 +1,15 @@
+{
+  "name": "exec-pgpjs",
+  "version": "0.0.1",
+  "description": "executes gpg and returns output as a Buffer",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "pgp",
+    "gpg"
+  ],
+  "author": "Mish Ochu <mishochu@gmail.com>",
+  "license": "MIT"
+}
