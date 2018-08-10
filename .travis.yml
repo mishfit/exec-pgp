@@ -8,6 +8,5 @@ before_script:
 script:
   - npm run cover
 after_script:
-  cat coverage/lcov.info | coveralls
-  gpg --yes --delete-secret-and-public-key email@example.com
+  cat coverage/lcov.info | coveralls && gpg --yes --delete-secret-and-public-key email@example.com
 

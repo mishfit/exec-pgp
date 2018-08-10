@@ -18,12 +18,12 @@ describe('exec-pgp', function () {
     })
 
     it('should return output of decryption in a result object', function (done) {
-      decrypt('./test/sometext.asc', (e, result) => {
-       expect(result).not.to.be(undefined) 
-       expect(result.output).to.eql('Some secret\n')
-       expect(result).to.have.property('errors', 'gpg: Good signature from "John Doe <email@example.com>" [ultimate]\n')
-       done()
-      })
+      decrypt('./test/sometext.asc')
+        .then(result => {
+          expect(result.output).to.eql('Some secret\n')
+          expect(result.errors).to.contain('gpg: Good signature from "John Doe <email@example.com>"')
+          done()
+        })
     })
 
     describe('callback', function () {
