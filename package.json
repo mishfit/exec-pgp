@@ -4,12 +4,28 @@
   "description": "executes gpg decrypt and returns output as part of an object",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "ci": "npm run lint && npm run cover",
+    "cover": "nyc mocha --recursive test",
+    "cover:report": "nyc mocha --report=text-lcov",
+    "lint": "eslint ./**/*.js",
+    "test": "mocha --recursive test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mishfit/exec-pgpjs.git"
   },
   "keywords": [
     "pgp",
     "gpg"
   ],
   "author": "Mish Ochu <mishochu@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "coveralls": "^3.0.2",
+    "eslint": "^5.3.0",
+    "eslint-plugin-node": "^7.0.1",
+    "expect.js": "^0.3.1",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2"
+  }
 }
