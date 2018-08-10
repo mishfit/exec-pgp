@@ -66,8 +66,8 @@ function spawnChild(program, args) {
     child.on('exit', (code) => {
       result.code = code
 
-      if (result.e) {
-        reject(result.e)
+      if (result.code !== 0) {
+        reject(result.e || result.errors)
       } else {
         resolve(result)
       }

@@ -21,7 +21,6 @@ describe('exec-pgp', function () {
       decrypt('./test/sometext.asc')
         .then(result => {
           expect(result.output).to.eql('Some secret\n')
-          expect(result.errors).to.contain('gpg: Good signature from "John Doe <email@example.com>"')
           done()
         })
     })
