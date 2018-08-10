@@ -1,5 +1,4 @@
 const fs = require('fs'),
-      path = require('path'),
       { spawn } = require('child_process')
       
 function decrypt (path, callback) {
@@ -9,16 +8,24 @@ function decrypt (path, callback) {
   if (callback && typeof callback === 'function') {
     exists(path)
       .then(fileExists => {
-        spawnChild(program, args)
-        .then(result => callback(undefined, result))
-        .catch(e => callback(e))
+        if (fileExists) {
+          spawnChild(program, args)
+          .then(result => callback(undefined, result))
+          .catch(e => callback(e))
+        } else {
+          return Promise.reject(`'${path}' does not exist`)
+        }
       })
       .catch(e => callback(e))
   } else {
 
     return exists(path)
       .then(fileExists => {
-        return spawnChild(program, args)
+        if (fileExists) {
+          return spawnChild(program, args)
+        } else {
+          return Promise.reject(`'${path}' does not exist`)
+        }
       })
   }
 }
@@ -57,8 +64,10 @@ function spawnChild(program, args) {
     })
 
     child.on('exit', (code) => {
+      result.code = code
+
       if (result.e) {
-        reject(e)
+        reject(result.e)
       } else {
         resolve(result)
       }
